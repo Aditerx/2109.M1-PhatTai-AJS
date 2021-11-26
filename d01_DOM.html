@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom</title>
+    <script src="JS/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <h2>Please enter your name</h2>
+        <p>Name: <input type="text"
+        placeholder="Nhap ten vao o obj.message ben duoi" id="txtName"></p>
+        <p>Name: <input type="text"
+        placeholder="Duoi nua~" id="txtName2"></p>
+        <div id="txtReturn"></div>
+    </div>
+
+    <script>
+        var obj = {};
+        //nhap ten vao giua cac dau " " trong o duoi day
+        obj.message = "Su dung VS Code de test"; //o nay ne
+
+        var nameBinder = new NameBinder({
+            "model": obj,
+            "property": "message"
+        });
+
+        nameBinder.addNameBinding("txtName", "value", "keyup");
+        nameBinder.addNameBinding("txtName2", "value", "keyup");
+        nameBinder.addNameBinding("txtReturn", "innerHTML");
+
+        obj.message = "nhap ten o tren";
+
+
+        function NameBinder(settings){
+            _this = this;
+            this.nameBindings = [];
+            this.value = settings.model[settings.property];
+
+            this.propertyGet = function(){
+                return _this.value;
+            };
+
+            this.propertySet = function(value){
+                _this.value = value;
+                for (var i = 0; i < _this.nameBindings.length; i++){
+                    var binding = _this.nameBindings[i];
+                    binding.element[binding.attribute] = value;
+                }
+            };
+
+            Object.defineProperty(settings.model, settings.property, {
+                get: this.propertyGet,
+                set: this.propertySet
+            });
+
+            this.addNameBinding = function(element, property, event){
+                var domElement = document.getElementById(element);
+
+                var binding = {
+                    element: domElement,
+                    property: property
+                };
+
+                if(event){
+                    domElement.addEventListener(event, function(){
+                        _this.propertySet (domElement[property]);
+                    });
+                    binding.event = event;
+                }
+                this.nameBindings.push(binding);
+                domElement[property] = _this.value;
+                return _this;
+            };
+
+            settings.model[settings.property] = this.value;
+        }
+    </script>
+</body>
+</html>

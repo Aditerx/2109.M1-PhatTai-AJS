@@ -1,0 +1,36 @@
+<div class="container">
+
+    <div class="row">
+        <form name="myForm" class="col-6">
+            <h2 style="text-align: center;">ADD FOOD</h2>
+            <hr>
+            <div class="form-group">
+                <label for="">Food ID:</label>
+                <div class="form-inline">
+                    <input class="form-control" type="text" name="fID" ng-model="fID" pattern="F\d{2}" maxlength="3" required placeholder="Input Food ID ">&nbsp;
+                    <small ng-show="myForm.fID.$error.required"> ID is required (Fxx - x is number)</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Food Name : </label>
+                <div class="form-inline">
+                    <input class="form-control" type="text" name="name" ng-model="name" required placeholder="Input Food Name"> &nbsp;
+                    <small ng-show="myForm.name.$error.required">Name is required</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Price : </label>
+                <div class="form-inline">
+                    <input class="form-control" type="number" name="price" ng-model="price" min="0" required placeholder="Set the price"> &nbsp;
+                    <small ng-show="myForm.price.$error.required">Price is required</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <button ng-click="addFood()" class="btn btn-warning" ng-disabled="myForm.price.$invalid || myForm.name.$invalid || myForm.id.$invalid">Add</button>
+            </div>
+        </form>
+        <div class="col-6">
+            <div ng-include="'Food.html'"></div>
+        </div>
+    </div>
+</div>

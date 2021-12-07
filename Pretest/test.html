@@ -1,0 +1,145 @@
+<!DOCTYPE html >
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pretest AngularJS</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.2/angular-route.min.js"></script>
+    <style>
+        * {
+            color: rgb(233, 177, 35);
+        }
+        
+        ul {
+            background-color: rgba(113, 147, 163, 0.692);
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        a:hover {
+            background-color: rgba(51, 143, 236, 0.4);
+        }
+        
+        .main {
+            width: 90%;
+            margin: 0 auto;
+            height: min-content;
+        }
+        
+        footer {
+            position: relative;
+            display: block;
+            text-align: center;
+            width: 100%;
+            margin: 0 auto;
+            bottom: 15px;
+            font-size: small;
+            padding-top: 3em;
+        }
+        
+        div small {
+            color: red;
+        }
+        
+        label {
+            font-weight: bold;
+        }
+        
+        input.ng-invalid {
+            border-color: rgb(233, 177, 35);
+        }
+        
+        input.ng-valid {
+            border-color: forestgreen;
+            background: mintcream;
+            color: blue;
+        }
+    </style>
+</head>
+
+<body ng-app="myApp" ng-controller="mainCtrl">
+
+    <div class="container p-3 my-4 bg-dark">
+        <h2>Pretest AngularJS</h2>
+        <hr>
+        <ul class="nav nav-pills nav-justified">
+            <li class="nav-item">
+                <a href="#/!" class="nav-link text-white">Home</a>
+            </li>
+            <li class="nav-item ">
+                <a href="#!Food" class="nav-link text-success">Food</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-danger" href="#!addFood">Add New Food</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-info" href="#!about">About</a>
+            </li>
+        </ul><br>
+
+        <div ng-view class="main"></div>
+
+        <footer>
+            2021 M&capbrcup;&capbrcup;gu&capbrcup;ete . All rights reserved
+        </footer>
+    </div>
+
+</body>
+
+<script>
+    var app = angular.module("myApp", ["ngRoute"]);
+
+    app.config(function($routeProvider) {
+
+        $routeProvider
+
+            .when("/Food", {
+                templateUrl: "Food.html",
+            })
+            .when("/addFood", {
+                templateUrl: "addFood.html",
+                controller: "addCtrl"
+            })
+            .when("/about", {
+                templateUrl: "aboutMe.html",
+            });
+    });
+
+    app.controller("mainCtrl", function($scope, $http) {
+
+        $http.get("Food.json").then(function(response) {
+            $scope.foodData = response.data;
+            return $scope.foodData;
+        });
+        // Delete a food
+        $scope.remove = function(index) {
+            if (confirm("Are you sure you want to delete this food?")) {
+                $scope.foodData.splice(index, 1);
+            }
+        }
+    });
+
+    app.controller("addCtrl", function($scope) {
+
+        $scope.addFood = function() {
+
+            alert("Add new food successfully");
+            $scope.foodData.push({
+                "fID": $scope.fID,
+                "name": $scope.name,
+                "price": $scope.price
+            });
+            return foodData;
+        };
+    });
+</script>
+
+</html>

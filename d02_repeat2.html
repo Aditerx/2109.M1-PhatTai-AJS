@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>repeat 2</title>
+    <script src="JS/angular.min.js"></script>
+    <style>
+        table, th, td{
+            border: 1px solid;
+            padding: 5px;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <div ng-app ng-init="ds=[
+        {name:'thanh sang', id:'S01', mark:95},
+        {name: 'phat tai', id:'S02', mark:75},
+        {name:'anh vu', id:'S03', mark:100}
+    ]">
+
+        <h2>Repeat 2</h2>
+        <hr>
+
+        <div>
+            <h4>Student List</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Student ID</th>
+                        <th>Student Name</th>
+                        <th>Mark</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat="sv in ds">
+                        <td>{{$index + 1}}</td>
+                        <td>{{sv.id}}</td>
+                        <td>{{sv.name}}</td>
+                        <td>{{sv.mark}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

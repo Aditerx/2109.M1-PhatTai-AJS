@@ -1,0 +1,36 @@
+<div class="container">
+
+    <div class="row">
+        <form name="myForm" class="col-6">
+            <h2 style="text-align: center;">Add Employee</h2>
+            <hr>
+            <div class="form-group">
+                <label for="">Name </label>
+                <div class="form-inline">
+                    <input class="form-control" type="text" name="name" ng-model="name" required placeholder="Enter name"> &nbsp;
+                    <small ng-show="myForm.name.$error.required">Name is required</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Department </label>
+                <div class="form-inline">
+                    <input class="form-control" type="text" name="dep" ng-model="dep" required placeholder="Enter dep."> &nbsp;
+                    <small ng-show="myForm.dep.$error.required">Department is required</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="">Email </label>
+                <div class="form-inline">
+                    <input class="form-control" type="email" name="mail" ng-model="mail" required placeholder="Enter email">
+                    <small>
+                        <span ng-show="myForm.mail.$error.required"> Email is required</span>
+                        <span ng-show="myForm.mail.$invalid && myForm.mail.$error.email"> Invalid email address</span>
+                    </small>
+                </div>
+            </div>
+            <div class="form-group">
+                <button ng-click="add()" class="btn btn-warning" ng-disabled="myForm.mail.$invalid && myForm.mail.$error.email || myForm.name.$invalid">Add</button>
+            </div>
+        </form>
+    </div>
+</div>

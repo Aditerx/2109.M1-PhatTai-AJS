@@ -1,0 +1,4 @@
+    {"records":[
+    {"Name":"Duy","Phone":"911","City":"Can Tho"},
+    {"Name":"Tai","Phone":"123","City":"Saigon"},
+    {"Name":"Ha","Phone":"888","City":"Hanoi"}]}
